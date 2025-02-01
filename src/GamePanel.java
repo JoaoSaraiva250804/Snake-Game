@@ -44,12 +44,6 @@ public class GamePanel extends JPanel implements ActionListener{
 	public void draw(Graphics g) {
 		 
 		if (running) {
-	        /* // Linhas da grade no fundo (comentar para remover)
-	        for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
-	            g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
-	            g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
-	        }
-	        */
 	        
 	        g.setColor(Color.red);
 	        g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
@@ -64,7 +58,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	            }
 	        }
 
-	        // Pontuação
+	     
 	        g.setColor(Color.red);
 	        g.setFont(new Font("Ink Free", Font.BOLD, 40));
 	        FontMetrics metrics1 = getFontMetrics(g.getFont());
@@ -74,7 +68,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	    }
 	}
 	public void newApple(){
-		//Gerar a maçã
+	
 		appleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE))*UNIT_SIZE;
 		appleY = random.nextInt((int)(SCREEN_HEIGHT/UNIT_SIZE))*UNIT_SIZE;
 	}
@@ -83,7 +77,7 @@ public class GamePanel extends JPanel implements ActionListener{
 			x[i] = x[i-1];
 			y[i] = y[i-1];
 		}
-		//Direção
+		
 		switch(direction) {
 		case 'U':
 			y[0] = y[0] - UNIT_SIZE;
@@ -100,33 +94,31 @@ public class GamePanel extends JPanel implements ActionListener{
 		}
 	}
 	public void checkApple() {
-		//Gerar novas maçãs e aumentar o corpo
 		if((x[0] == appleX) && (y[0] == appleY)) {
 			bodyParts++;
 			applesEaten++;
 			newApple();
 		}
 	}
-	public void checkCollisions() {
-		//Checa se a cabeça colide com o corpo
+	public void checkCollisions() {	
 		for(int i = bodyParts;i>0;i--) {
 			if((x[0] == x[i])&& (y[0] == y[i])) {
 				running = false;
 			}
 		}
-		//Checa se a cabeça colide na parte esquerda da borda
+		
 		if(x[0] < 0) {
 			running = false;
 		}
-	    //Checa se a cabeça colide na parte direita da borda
+		
 		if(x[0] > SCREEN_WIDTH) {
 			running = false;
 		}
-	    //Checa se a cabeça colide na parte superior da borda
+	   
 		if(y[0] < 0) {
 			running = false;
 		}
-		 //Checa se a cabeça colide na parte inferior da borda
+		 
 		if(y[0] > SCREEN_HEIGHT) {
 			running = false;
 		}
@@ -137,12 +129,12 @@ public class GamePanel extends JPanel implements ActionListener{
 	}
 	
 	public void gameOver(Graphics g) {
-		//Pontuação
+
 		g.setColor(Color.red);
 		g.setFont( new Font("Ink Free",Font.BOLD, 40));
 		FontMetrics metrics1 = getFontMetrics(g.getFont());
 		g.drawString("Score: "+applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score: "+applesEaten))/2, g.getFont().getSize());
-		//Texto de Game Over
+		
 		g.setColor(Color.red);
 		g.setFont( new Font("Ink Free",Font.BOLD, 75));
 		FontMetrics metrics2 = getFontMetrics(g.getFont());
@@ -150,7 +142,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//Mover
+		
 		if(running) {
 			move();
 			checkApple();
