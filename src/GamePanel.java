@@ -72,7 +72,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	    }
 	}
 	public void newApple(){
-		//Gerar a maçã
+		
 		appleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE))*UNIT_SIZE;
 		appleY = random.nextInt((int)(SCREEN_HEIGHT/UNIT_SIZE))*UNIT_SIZE;
 	}
@@ -81,7 +81,7 @@ public class GamePanel extends JPanel implements ActionListener{
 			x[i] = x[i-1];
 			y[i] = y[i-1];
 		}
-		//Direção
+		
 		switch(direction) {
 		case 'U':
 			y[0] = y[0] - UNIT_SIZE;
